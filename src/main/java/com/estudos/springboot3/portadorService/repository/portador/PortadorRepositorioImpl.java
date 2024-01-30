@@ -3,8 +3,11 @@ package com.estudos.springboot3.portadorService.repository.portador;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.estudos.springboot3.portadorService.entity.portador.Portador;
 
+@Repository
 public class PortadorRepositorioImpl implements PortadorRepositorio{
 
 	// simula a base de dados
