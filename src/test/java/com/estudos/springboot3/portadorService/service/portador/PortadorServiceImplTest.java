@@ -1,4 +1,4 @@
-package com.estudos.springboot3.portadorService.controller.portador;
+package com.estudos.springboot3.portadorService.service.portador;
 
 import java.util.List;
 
