@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.estudos.springboot3.portadorService.entity.endereco.Endereco;
 import com.estudos.springboot3.portadorService.entity.portador.Portador;
@@ -17,6 +18,7 @@ import com.estudos.springboot3.portadorService.repository.portador.PortadorRepos
 import com.estudos.springboot3.portadorService.service.endereco.EnderecoService;
 import com.estudos.springboot3.portadorService.service.portador.PortadorServiceImpl;
 
+@SpringBootTest
 public class PortadorServiceImplTest {
 
 	public static final Long ID_PORTADOR = 100L;
