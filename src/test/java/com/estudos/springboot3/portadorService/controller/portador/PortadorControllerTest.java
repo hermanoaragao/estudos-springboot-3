@@ -105,4 +105,22 @@ public class PortadorControllerTest {
 		// verifica se o service não é chamado mais de uma vez
 		Mockito.verifyNoMoreInteractions(portadorService);
 	}
+	
+	@Test
+	public void getPortadoresTest() throws Exception {
+		// mocka o service para o metodo getPortadores()
+		Mockito.when(portadorService.getPortadores()).thenReturn(Collections.singletonList(portador));
+		
+		// monta a requisição de um metodo get sem json
+		mockMvc.perform(MockMvcRequestBuilders.get(url+"/")
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(MockMvcResultMatchers.status().isOk());
+
+		// verifica se o service é chamado apenas uma vez
+		Mockito.verify(portadorService).getPortadores();
+		
+		// verifica se o service não é chamado mais de uma vez
+		Mockito.verifyNoMoreInteractions(portadorService);
+	}
 }
