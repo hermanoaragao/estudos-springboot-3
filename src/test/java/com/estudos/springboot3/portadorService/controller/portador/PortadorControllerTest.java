@@ -1,11 +1,13 @@
 package com.estudos.springboot3.portadorService.controller.portador;
 
+
 import java.util.Collections;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -121,6 +123,28 @@ public class PortadorControllerTest {
 		Mockito.verify(portadorService).getPortadores();
 		
 		// verifica se o service não é chamado mais de uma vez
+		Mockito.verifyNoMoreInteractions(portadorService);
+	}
+	
+	@Test
+	public void salvarPortadorTest() throws Exception {
+		
+		// mocka o service com o metodo save(Portador)
+		//Mockito.lenient().when(portadorService.save(portador)).thenReturn(portador);
+		Mockito.when(portadorService.save(ArgumentMatchers.any())).thenReturn(portador);
+		//Mockito.lenient().when(enderecoService.gerarEndereco()).thenReturn(endereco);
+		
+		// executando o metodo post do controller
+		mockMvc.perform(MockMvcRequestBuilders.post(url+"/")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(jsonPortador)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(MockMvcResultMatchers.status().isOk());
+		
+		// verifica se foi chamado uma vez
+		Mockito.verify(portadorService).save(ArgumentMatchers.any());
+		
+		// verifica se nao tem mais nenhuma chamada no service
 		Mockito.verifyNoMoreInteractions(portadorService);
 	}
 }
