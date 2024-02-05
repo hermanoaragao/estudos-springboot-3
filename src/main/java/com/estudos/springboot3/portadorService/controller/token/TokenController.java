@@ -17,9 +17,15 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/tokens")
 public class TokenController {
 
+	// variavel que pega o campo no application.properties
 	@Value("${url.keycloak}")
 	private String urlKeyCloak;
 	
+	/**
+	 * Faz a geração de token batendo no keycloak
+	 * @param user
+	 * @return
+	 */
 	@PostMapping
 	public ResponseEntity<String> token(@RequestBody User user) {
 		
