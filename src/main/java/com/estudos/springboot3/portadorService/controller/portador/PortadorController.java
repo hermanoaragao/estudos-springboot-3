@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +39,7 @@ public class PortadorController {
 	 * @return
 	 */
 	@PostMapping
+	@PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
 	public ResponseEntity<Portador> cadastrar(@RequestBody PortadorDTO dto)
 	{
 		// monta um portador usando o padrão builder
@@ -70,6 +72,7 @@ public class PortadorController {
 	 * @return
 	 */
 	@PostMapping("/lote")
+	@PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
 	public ResponseEntity<List<Portador>> cadastrarLote(@RequestBody List<PortadorDTO> listPortadorDTO)
 	{
 		List<Portador> listRetorno = new ArrayList<Portador>();
@@ -93,6 +96,7 @@ public class PortadorController {
 	 * @return
 	 */
 	@PostMapping("/gerarlote")
+	@PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
 	public ResponseEntity<List<PortadorDTO>> gerarLote()
 	{
 		List<PortadorDTO> listaRetornoDTO = new ArrayList<PortadorDTO>();
@@ -112,6 +116,7 @@ public class PortadorController {
 	 * @return
 	 */
 	@GetMapping()
+	@PreAuthorize("hasRole('ROLE_USUARIO')")
 	public ResponseEntity<List<PortadorDTO>> getPortadores()
 	{
 		List<PortadorDTO> listaRetorno = new ArrayList<PortadorDTO>();
@@ -129,6 +134,7 @@ public class PortadorController {
 	 * @param dto
 	 */
 	@DeleteMapping
+	@PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
 	public void remover(@RequestBody PortadorDTO dto)
 	{
 		// monta um portador usando o padrão builder
@@ -149,6 +155,7 @@ public class PortadorController {
 	 * @param dto
 	 */
 	@PutMapping
+	@PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
 	public ResponseEntity<Portador> alterar(@RequestBody PortadorDTO dto)
 	{
 		// monta um portador usando o padrão builder

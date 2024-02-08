@@ -25,6 +25,14 @@ public class TokenController {
 	 * Faz a geração de token batendo no keycloak
 	 * @param user
 	 * @return
+	 * 
+	 // Exemplo do body da requisicao: todos os campos passados no body, precisam estar configurados no keycloak
+	 {
+	    "client_id": "app_portadorService",
+	    "username": "user_portador_service",
+	    "password": "portador",
+	    "grant_type": "password"
+	 }
 	 */
 	@PostMapping
 	public ResponseEntity<String> token(@RequestBody User user) {
@@ -41,9 +49,11 @@ public class TokenController {
 		
 		HttpEntity<MultiValueMap<String, String> > entity = new HttpEntity<MultiValueMap<String,String>>(formData, headers);
 		
+		// chamada no keycloak
 		ResponseEntity<String> retorno = rt.postForEntity(urlKeyCloak, entity, String.class);
 		return retorno;
 	}
 	
+	// classe para mapear o request recebido no token
 	public record User(String client_id, String username, String password, String grant_type) {}
 }
