@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 @RestController
 @RequestMapping("/tokens")
 public class TokenController {
@@ -35,6 +39,10 @@ public class TokenController {
 	 }
 	 */
 	@PostMapping
+	@Operation(summary = "Gera um token que pode ser utilizado no consumo das API do Portador Service", method = "POST")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Token gerado com sucesso"),
+	})
 	public ResponseEntity<String> token(@RequestBody User user) {
 		
 		HttpHeaders headers = new HttpHeaders();

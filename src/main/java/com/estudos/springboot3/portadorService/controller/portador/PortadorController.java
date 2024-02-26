@@ -18,8 +18,12 @@ import com.estudos.springboot3.portadorService.entity.endereco.Endereco;
 import com.estudos.springboot3.portadorService.entity.portador.Portador;
 import com.estudos.springboot3.portadorService.service.portador.PortadorService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 @RestController
-@RequestMapping("/portadores")
+@RequestMapping(value = "/portadores", produces = {"application/json"})
 public class PortadorController {
 
 	
@@ -40,6 +44,11 @@ public class PortadorController {
 	 */
 	@PostMapping
 	@PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
+	@Operation(summary = "Recebe os dados de um portador e armazena em base", method = "POST")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Cadastro processado com sucesso"),
+			@ApiResponse(responseCode = "401", description = "Usuário não autenticado")
+	})
 	public ResponseEntity<Portador> cadastrar(@RequestBody PortadorDTO dto)
 	{
 		// monta um portador usando o padrão builder
@@ -73,6 +82,11 @@ public class PortadorController {
 	 */
 	@PostMapping("/lote")
 	@PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
+	@Operation(summary = "Recebe um lote de portadores e armazana em base", method = "POST")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Cadastro processado com sucesso"),
+			@ApiResponse(responseCode = "401", description = "Usuário não autenticado")
+	})
 	public ResponseEntity<List<Portador>> cadastrarLote(@RequestBody List<PortadorDTO> listPortadorDTO)
 	{
 		List<Portador> listRetorno = new ArrayList<Portador>();
@@ -97,6 +111,11 @@ public class PortadorController {
 	 */
 	@PostMapping("/gerarlote")
 	@PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
+	@Operation(summary = "Gera um lote de 20 portadores aleatórios", method = "POST")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Cadastro processado com sucesso"),
+			@ApiResponse(responseCode = "401", description = "Usuário não autenticado")
+	})
 	public ResponseEntity<List<PortadorDTO>> gerarLote()
 	{
 		List<PortadorDTO> listaRetornoDTO = new ArrayList<PortadorDTO>();
@@ -117,6 +136,11 @@ public class PortadorController {
 	 */
 	@GetMapping()
 	@PreAuthorize("hasRole('ROLE_USUARIO')")
+	@Operation(summary = "Retorna todos os portadores cadastrados", method = "POST")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Requisição processada com sucesso"),
+			@ApiResponse(responseCode = "401", description = "Usuário não autenticado")
+	})
 	public ResponseEntity<List<PortadorDTO>> getPortadores()
 	{
 		List<PortadorDTO> listaRetorno = new ArrayList<PortadorDTO>();
@@ -135,6 +159,11 @@ public class PortadorController {
 	 */
 	@DeleteMapping
 	@PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
+	@Operation(summary = "Apaga um portador cadastrado com o mesmo CPF do portador passado como parâmetro", method = "POST")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Requisição processada com sucesso"),
+			@ApiResponse(responseCode = "401", description = "Usuário não autenticado")
+	})
 	public void remover(@RequestBody PortadorDTO dto)
 	{
 		// monta um portador usando o padrão builder

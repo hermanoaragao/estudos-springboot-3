@@ -14,6 +14,20 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity
 public class SecurityConfig {
 	
+	private static final String[] AUTH_WHITELIST = {
+            // -- Swagger UI v2
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**",
+            // -- Swagger UI v3 (OpenAPI)
+            "/v3/api-docs/**",
+            "/swagger-ui/**"
+            // other public endpoints of your API may be appended to this array
+    };
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -22,7 +36,7 @@ public class SecurityConfig {
 		http
 		.authorizeHttpRequests((authorize) -> {
 			authorize.requestMatchers("/tokens").permitAll();
-			//authorize.requestMatchers("/portadores/lote").permitAll();
+			authorize.requestMatchers(AUTH_WHITELIST).permitAll();
 			authorize.anyRequest().authenticated();
 		})
 		//.oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults())
@@ -45,6 +59,8 @@ public class SecurityConfig {
 	public JwtDecoder jwtDecoder() {
 		return JwtDecoders.fromIssuerLocation("http://localhost:8080/realms/Estudos_Spring");
 	}
+	
+	
 	
 	/*
 	@Bean
