@@ -2,11 +2,18 @@ package com.estudos.springboot3.portadorService.entity.portador;
 
 import java.util.Objects;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.estudos.springboot3.portadorService.entity.ObjetoGenerico;
 import com.estudos.springboot3.portadorService.entity.endereco.Endereco;
 
-public class Portador extends ObjetoGenerico{
+@Document
+public class Portador {
 
+	@Id
+	private String id;
+	
 	private String nome;
 	private String cpfCnpj;
 	private String telefone;
@@ -97,4 +104,14 @@ public class Portador extends ObjetoGenerico{
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	
 }

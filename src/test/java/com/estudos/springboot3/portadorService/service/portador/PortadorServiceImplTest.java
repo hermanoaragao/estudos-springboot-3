@@ -58,7 +58,7 @@ public class PortadorServiceImplTest {
                 .telefone(TELEFONE)
                 .build();
 
-        portador.setId(1l);
+        //portador.setId(1);
 
         endereco = new Endereco.EnderecoBuilder()
                 .cep("58015720")

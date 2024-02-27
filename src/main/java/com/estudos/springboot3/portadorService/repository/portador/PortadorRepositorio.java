@@ -2,9 +2,11 @@ package com.estudos.springboot3.portadorService.repository.portador;
 
 import java.util.List;
 
+import org.springframework.data.mongodb.repository.MongoRepository;
+
 import com.estudos.springboot3.portadorService.entity.portador.Portador;
 
-public interface PortadorRepositorio {
+public interface PortadorRepositorio extends MongoRepository<Portador, Long> {
 
 	Portador save(Portador p);
 	

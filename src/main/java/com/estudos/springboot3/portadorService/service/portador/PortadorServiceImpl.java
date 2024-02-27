@@ -36,7 +36,8 @@ public class PortadorServiceImpl implements PortadorService{
 	public Portador save(Portador portador) {
 		
 		portador.setEndereco(enderecoService.gerarEndereco());
-		portadorDAO.save(portador);
+		//portadorDAO.save(portador);
+		portadorDAO.insert(portador);
 		return portador;
 	}
 
@@ -79,7 +80,7 @@ public class PortadorServiceImpl implements PortadorService{
 					.telefone(telefones[gerador.nextInt(telefones.length)])
 					.build();
 			p.setEndereco(enderecoService.gerarEndereco());
-			portadorDAO.save(p);
+			portadorDAO.insert(p);
 			loteCadastrado.add(p);
 		}
 		

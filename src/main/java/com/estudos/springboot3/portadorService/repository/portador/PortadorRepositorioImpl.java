@@ -8,14 +8,14 @@ import org.springframework.stereotype.Repository;
 import com.estudos.springboot3.portadorService.entity.portador.Portador;
 
 @Repository
-public class PortadorRepositorioImpl implements PortadorRepositorio{
+public class PortadorRepositorioImpl {
 
 	// simula a base de dados
 	ArrayList<Portador> listaPortador = new ArrayList<Portador>();
 
 
 	public Portador save(Portador p) {
-		p.setId(Long.valueOf(listaPortador.size()+1));
+		p.setId(""+listaPortador.size()+1);
 		listaPortador.add(p);
 		return p;
 	}
@@ -45,7 +45,7 @@ public class PortadorRepositorioImpl implements PortadorRepositorio{
 	public Portador getById(long id) {
 
 		for (int i = 0; i < listaPortador.size(); i++) {
-			if(listaPortador.get(i).getId() == id)
+			if(listaPortador.get(i).getId().equals(id))
 				return listaPortador.get(i);
 		}
 		return null;
