@@ -1,5 +1,6 @@
 package com.estudos.springboot3.portadorService.security;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -13,6 +14,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
+	
+	@Value("${url.keycloak}")
+	private String urlKeyCloak;
 	
 	private static final String[] AUTH_WHITELIST = {
             // -- Swagger UI v2
@@ -52,12 +56,13 @@ public class SecurityConfig {
         .oauth2ResourceServer()
         .jwt();
 		*/
+		//http.cors();
 		return http.build();
 	}
 	
 	@Bean
 	public JwtDecoder jwtDecoder() {
-		return JwtDecoders.fromIssuerLocation("http://localhost:8080/realms/Estudos_Spring");
+		return JwtDecoders.fromIssuerLocation("http://localhost:8080/realms/sinergy");
 	}
 	
 	
